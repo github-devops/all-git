@@ -7,10 +7,10 @@ COLOR_YELLOW='\033[1;33m'
 COLOR_RED='\033[0;31m'
 COLOR_BLUE='\033[1;34m'
 #------------------------------------------------  VARIABLES  ------------------------------------------------------------------------
-WORK_DIR="${HOME}"
+BASE_DIR="${HOME}"
 NUM_DEFICES=5
 
-dir_list="$( LANG=C; find "${WORK_DIR}" -type d -name '.git' -print 2>&1 | \
+dir_list="$( LANG=C; find "${BASE_DIR}" -type d -name '.git' -print 2>&1 | \
 		grep -v 'Permission denied' | sed 's/\.git//' )"
 
 MSG_OK='ok'
@@ -52,7 +52,7 @@ do
  	is_git_status "${STATUS_NEED_COMMIT}"  || is_git_status "${STATUS_NEED_ADD}" && \
     	OUTPUT_TEXT="${COLOR_RED}"${MSG_SEE_MORE}"${COLOR_RESET}"
 
-	echo -e ${dir}$(print_defis_after "${dir}" "${dir_list}")$([ "${dir}" = "${WORK_DIR}" ] && echo '->' || echo '>') "${OUTPUT_TEXT}"
+	echo -e ${dir}$(print_defis_after "${dir}" "${dir_list}")$([ "${dir}" = "${BASE_DIR}" ] && echo '->' || echo '>') "${OUTPUT_TEXT}"
 	unset OUTPUT_TEXT
 done
 
